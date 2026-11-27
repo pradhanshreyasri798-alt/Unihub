@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#4f46e5">
+  <title>UniHub — Campus Marketplace</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-main wrap">
+      <a class="brand" href="#" aria-label="UniHub home"><span class="brand-icon"><i class="fa-solid fa-graduation-cap"></i></span><span><b>UniHub</b><small>Campus exchange</small></span></a>
+      <label class="search desktop-search"><i class="fa-solid fa-magnifying-glass"></i><input id="searchInput" type="search" placeholder="Search books, electronics, bikes…" autocomplete="off"><button class="clear-search" aria-label="Clear search" hidden><i class="fa-solid fa-xmark"></i></button></label>
+      <div class="header-actions">
+        <button class="button primary sell-button" id="openSellModalBtn"><i class="fa-solid fa-plus"></i><span>Sell item</span></button>
+        <button class="icon-button" id="openOrdersModalBtn" aria-label="My orders"><i class="fa-solid fa-receipt"></i></button>
+        <button class="profile-button" id="userDropdownBtn" aria-label="Sign in"><span class="avatar" id="userAvatar">S</span><span class="profile-name" id="userNameDisplay">Student</span><i class="fa-solid fa-chevron-down small-chevron"></i></button>
+      </div>
+      <div class="profile-menu" id="userMenuDropdown" hidden><p id="signedInAs">Demo campus account</p><button id="menuLoginBtn"><i class="fa-regular fa-user"></i> Sign in / switch account</button><button id="menuOrdersBtn"><i class="fa-solid fa-receipt"></i> My purchases & PINs</button></div>
+    </div>
+    <div class="mobile-search wrap"><label class="search"><i class="fa-solid fa-magnifying-glass"></i><input id="mobileSearchInput" type="search" placeholder="Search campus listings…" autocomplete="off"><button class="clear-search" aria-label="Clear search" hidden><i class="fa-solid fa-xmark"></i></button></label></div>
+  </header>
+  <nav class="category-nav" aria-label="Listing categories"><div class="wrap category-list" id="categoryPillsContainer"></div></nav>
+  <main class="wrap main-content">
+    <section class="intro"><div><p class="eyebrow"><i class="fa-solid fa-location-dot"></i> Buy and sell on campus</p><h1>Good finds. <span>Good neighbours.</span></h1><p class="intro-copy">A trusted place for students to pass useful things along.</p></div><div class="safe-note"><i class="fa-solid fa-shield-halved"></i><span>Meet in public campus spots<br><b>Pay at handover if you prefer</b></span></div></section>
+    <section class="listing-heading"><div><h2>Campus listings</h2><p id="resultsCount">Loading listings…</p></div><div class="filters"><select id="conditionFilter" aria-label="Filter by condition"><option value="All">All conditions</option><option>Like New</option><option>Excellent</option><option>Good</option><option>Fair</option></select><select id="sortBy" aria-label="Sort listings"><option value="latest">Newest first</option><option value="price-low">Price: low to high</option><option value="price-high">Price: high to low</option><option value="savings">Biggest savings</option></select></div></section>
+    <div id="itemsGrid" class="items-grid" aria-live="polite"></div>
+    <div id="emptyState" class="empty-state" hidden><span class="empty-icon"><i class="fa-solid fa-box-open"></i></span><h3>No listings found</h3><p>Try a different search or category, or be the first to list something.</p><button class="button primary" id="emptySellBtn"><i class="fa-solid fa-plus"></i> Sell an item</button></div>
+    <section class="trust-strip"><i class="fa-solid fa-people-arrows-left-right"></i><span><b>Made for campus life.</b> Meet locally, inspect before you pay, and keep your handover PIN private until the exchange.</span></section>
+  </main>
+  <footer class="footer"><div class="wrap">UniHub <span>·</span> A student-to-student campus marketplace</div></footer>
+
+  <div class="modal" id="sellModal" aria-hidden="true"><section class="dialog" role="dialog" aria-modal="true" aria-labelledby="sellTitle"><div class="dialog-head"><div><p class="eyebrow">SELL ON CAMPUS</p><h2 id="sellTitle">Create a listing</h2></div><button class="close-button" data-close="sellModal" aria-label="Close"><i class="fa-solid fa-xmark"></i></button></div><form id="sellForm" class="form-grid"><label class="field full">Item title<input name="title" required maxlength="100" placeholder="e.g. Calculus textbook, barely used"></label><label class="field">Category<select name="category"><option>Textbooks</option><option>Electronics</option><option>Dorm Life</option><option>Bicycles</option><option>Lab & Stationery</option><option>Other</option></select></label><label class="field">Condition<select name="condition"><option>Good</option><option>Like New</option><option>Excellent</option><option>Fair</option></select></label><label class="field">Your price (₹)<input name="price" type="number" min="1" required placeholder="500"></label><label class="field">Original price (₹)<input name="originalPrice" type="number" min="0" placeholder="Optional"></label><label class="field full">Meetup spot<input name="location" required placeholder="e.g. Central Library Plaza"></label><label class="field full">Photo URL <span class="muted">(optional)</span><input name="imageUrl" type="url" placeholder="https://…"></label><label class="field full">Description<textarea name="description" rows="3" placeholder="Condition, details, course code…"></textarea></label><div class="form-actions full"><button type="button" class="button secondary" data-close="sellModal">Cancel</button><button class="button primary" type="submit"><i class="fa-solid fa-plus"></i> Publish listing</button></div></form></section></div>
+
+  <div class="modal" id="checkoutModal" aria-hidden="true"><section class="dialog" role="dialog" aria-modal="true" aria-labelledby="checkoutTitle"><div class="dialog-head"><div><p class="eyebrow">SAFE CAMPUS HANDOVER</p><h2 id="checkoutTitle">Reserve this item</h2></div><button class="close-button" data-close="checkoutModal" aria-label="Close"><i class="fa-solid fa-xmark"></i></button></div><div id="checkoutModalBody"></div></section></div>
+  <div class="modal" id="ordersModal" aria-hidden="true"><section class="dialog dialog-tall" role="dialog" aria-modal="true" aria-labelledby="ordersTitle"><div class="dialog-head"><div><p class="eyebrow">YOUR CAMPUS ACTIVITY</p><h2 id="ordersTitle">Purchases & listings</h2></div><button class="close-button" data-close="ordersModal" aria-label="Close"><i class="fa-solid fa-xmark"></i></button></div><div class="tabs"><button class="tab active" data-tab="purchases">Purchases <span id="purchasesCount">0</span></button><button class="tab" data-tab="sales">My listings <span id="salesCount">0</span></button></div><div id="ordersModalContent" class="dialog-content"></div></section></div>
+  <div class="modal" id="successModal" aria-hidden="true"><section class="dialog success-dialog" role="dialog" aria-modal="true"><div class="success-mark"><i class="fa-solid fa-check"></i></div><p class="eyebrow">RESERVATION CONFIRMED</p><h2>You're all set!</h2><p id="successSummary"></p><div class="pin-box"><span>HANDOVER PIN</span><strong id="successPin">----</strong><small>Only share this with the seller after you've inspected the item.</small></div><button class="button primary full-button" id="successOrdersBtn">View my purchases</button></section></div>
+  <div class="modal" id="authModal" aria-hidden="true"><section class="dialog" role="dialog" aria-modal="true" aria-labelledby="authTitle"><div class="dialog-head"><div><p class="eyebrow">WELCOME TO UNIHUB</p><h2 id="authTitle">Sign in to your campus account</h2></div><button class="close-button" data-close="authModal" aria-label="Close"><i class="fa-solid fa-xmark"></i></button></div><form id="loginForm" class="form-grid"><label class="field full">Campus email<input id="loginEmail" name="email" type="email" required placeholder="you@campus.edu"></label><div class="form-actions full"><button class="button primary full-button" type="submit">Continue with email</button></div></form><p class="auth-note">This demo signs you in with an email address; it does not send a password or verification email.</p></section></div>
+  <div class="modal" id="chatModal" aria-hidden="true"><section class="dialog chat-dialog" role="dialog" aria-modal="true" aria-labelledby="chatTitle"><div class="dialog-head"><div><p class="eyebrow">ITEM INQUIRY</p><h2 id="chatTitle">Chat with seller</h2><p class="muted" id="chatItemTitle"></p></div><button class="close-button" data-close="chatModal" aria-label="Close"><i class="fa-solid fa-xmark"></i></button></div><div id="chatMessagesContainer" class="chat-messages"></div><form id="chatForm" class="chat-form"><input id="chatInputText" maxlength="500" required placeholder="Ask about the item or meetup…"><button class="button primary" aria-label="Send message"><i class="fa-solid fa-paper-plane"></i></button></form></section></div>
+  <div id="toastContainer" class="toast-container" aria-live="polite"></div>
+  <script src="app.js" defer></script>
+</body>
+</html>

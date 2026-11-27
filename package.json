@@ -1,0 +1,10 @@
+{
+  "name": "unihub",
+  "version": "1.0.0",
+  "description": "UniHub — mobile-friendly peer-to-peer campus marketplace",
+  "main": "server.js",
+  "scripts": { "start": "node server.js", "dev": "node server.js" },
+  "keywords": ["campus", "marketplace", "second-hand", "unihub"],
+  "author": "UniHub Team",
+  "license": "MIT"
+}
